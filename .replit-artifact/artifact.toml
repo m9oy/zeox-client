@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Roblox Scripts Hub"
+version = "1.0.0"
+id = "artifacts/roblox-hub"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19882
+
+[services.development]
+run = "pnpm --filter @workspace/roblox-hub run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/roblox-hub", "run", "build" ]
+publicDir = "artifacts/roblox-hub/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19882"
+BASE_PATH = "/"
